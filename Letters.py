@@ -1,11 +1,12 @@
 import nltk
 import pandas as pd
 import os
-from nltk.corpus import wordnet
+from nltk.corpus import wordnet, stopwords
+
 
 # Define output directory and files
-output_dir = r"C:\Users\User\Desktop\Test\Palindrome-Distribution"
-os.makedirs(output_dir, exist_ok=True)
+output_dir = r"./"
+# os.makedirs(output_dir, exist_ok=True)
 output_file = os.path.join(output_dir, "words.csv")
 
 
@@ -15,9 +16,11 @@ def generate_words_csv():
         print("⚙️ Generating words.csv from WordNet...")
 
         # Download required corpora
+        nltk.download("stopwords")
         nltk.download("wordnet")
         nltk.download("omw-1.4")
-
+        set(stopwords.words('english'))
+        
         # Get unique, lowercase words from WordNet
         word_list = sorted(set(w.lower() for w in wordnet.words()))
 
